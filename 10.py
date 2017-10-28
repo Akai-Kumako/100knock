@@ -1,5 +1,5 @@
 #10.行数のカウント
-# wc hightemp.txt
+# wc -l hightemp.txt
 
 f = open("hightemp.txt", "r")
 
