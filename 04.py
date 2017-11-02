@@ -12,8 +12,8 @@ result = {}
 
 for i in range(len(a)):
   if i + 1 in pull:
-    result[i + 1] = a[i][0:1]
+    result[i + 1] = a[i][:1]
   else:
-    result[i + 1] = a[i][0:2]
+    result[i + 1] = a[i][:2]
 
 print(result)

@@ -16,8 +16,8 @@ def ngram(target, n):
 setA = set(ngram(charA, 2))
 setB = set(ngram(charB, 2))
 
-print(setA | setB)
-print(setA & setB)
+print(setA.union(setB))
+print(setA.intersection(setB))
 print(setA.difference(setB))
 print(setB.difference(setA))
 

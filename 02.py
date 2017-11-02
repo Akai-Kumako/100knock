@@ -2,12 +2,11 @@
 
 a = list("パトカー")
 b = list("タクシー")
-i = 1
+c = []
 
-for w in b:
-  a.insert(i, w)
-  i += 2
+for i, j in zip(a, b):
+  c += i + j
 
-a = "".join(a)
+c = "".join(c)
 
-print(a)
+print(c)

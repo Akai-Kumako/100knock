@@ -2,7 +2,7 @@
 
 a = "I am an NLPer"
 
-word = a.split(" ")
+word = a.split()
 char = list(a)
 
 def ngram(target, n):
