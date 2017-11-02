@@ -11,5 +11,6 @@ def cipher(text):
       encr = "".join([encr, char])
   return encr
 
+print(a)
 print(cipher(a))
 print(cipher(cipher(a)))

@@ -7,7 +7,7 @@ a = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also
 pull = [1, 5, 6, 7, 8, 9, 15, 16, 19]
 
 a = re.sub(r'[\.,]+', "", a)
-a = a.split(" ")
+a = a.split()
 result = {}
 
 for i in range(len(a)):
