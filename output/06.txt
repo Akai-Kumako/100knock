@@ -1,0 +1,6 @@
+{'ar', 'ag', 'ad', 'di', 'is', 'ph', 'ra', 'se', 'gr', 'pa', 'ap'}
+{'ra', 'pa', 'ap', 'ar'}
+{'ad', 'se', 'di', 'is'}
+{'gr', 'ph', 'ag'}
+True
+False
