@@ -5,8 +5,9 @@ f = open("hightemp.txt", "r")
 a = open("col1.txt", "w")
 b = open("col2.txt", "w")
 
-a.write(f.readline())
-b.write(f.readline())
+lines = f.readlines()
+
+for i in lines:
 
 f.close()
 a.close()

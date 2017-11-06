@@ -3,6 +3,6 @@
 
 f = open("hightemp.txt", "r")
 
-print(f.read().replace("\t", " "))
+print(f.read().replace("\t", " "), end="")
 
 f.close()

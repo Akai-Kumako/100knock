@@ -1,5 +1,5 @@
 #18.各行を3コラム目の数値の降順にソート
-# cat hightemp.txt | awk '{print $1}' | sort | uniq
+# cat hightemp.txt | awk '{print}' | sort | uniq
 
 import sys
 

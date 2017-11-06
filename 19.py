@@ -1,5 +1,5 @@
 #19.各行の1コラム目の文字列の出現頻度を求め、出現頻度を高い順に並べる
-# cat hightemp.txt | awk '{print $1}' | sort | uniq
+# cut -f1 hightemp.txt | sort | uniq -c | sort --reverse
 
 import sys
 
