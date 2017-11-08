@@ -1,4 +1,4 @@
-#22.カテゴリ名の抽出
+#24.ファイル参照の抽出
 
 import json
 import re
@@ -10,5 +10,5 @@ with open("jawiki-country.json", "r") as f:
       b = a.get("text").split("\n")
 
 for j in b:
-  if "Category" in j:
-    print(re.search("^\[\[Category:(.*?)(\|.*)*\]\]$", j).group(1))
+  c = re.search(u"(File|ファイル):(.*?)\|", j)
+  if c != None: print(c.group(2))

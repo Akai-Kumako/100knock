@@ -1,4 +1,4 @@
-#22.カテゴリ名の抽出
+#23.セクション構造
 
 import json
 import re
@@ -10,5 +10,5 @@ with open("jawiki-country.json", "r") as f:
       b = a.get("text").split("\n")
 
 for j in b:
-  if "Category" in j:
-    print(re.search("^\[\[Category:(.*?)(\|.*)*\]\]$", j).group(1))
+  c = re.search(u"^(=+)\s*(.*?)\s*(=+)$", j)
+  if c != None: print("{0} [{1}]".format(c.group(2), len(c.group(1)) - 1))
