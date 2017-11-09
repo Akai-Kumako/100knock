@@ -9,6 +9,8 @@ with open("jawiki-country.json", "r") as f:
     if a.get("title") == "イギリス":
       b = a.get("text").split("\n")
 
+regex = re.compile(u"^(=+)\s*(.*?)\s*(=+)$")
+
 for j in b:
-  c = re.search(u"^(=+)\s*(.*?)\s*(=+)$", j)
+  c = regex.search(j)
   if c != None: print("{0} [{1}]".format(c.group(2), len(c.group(1)) - 1))

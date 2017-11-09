@@ -10,9 +10,10 @@ with open("jawiki-country.json", "r") as f:
       b = a.get("text").split("\n")
 
 info = {}
+regex = re.compile(u"^\|(.*?)\s*=\s*(.*?)$")
 
 for j in b:
-  c = re.search(u"^\|(.*?)\s*=\s*(.*?)$", j)
+  c = regex.search(j)
   if c != None: info[c.group(1)] = c.group(2)
   if j == "}}": break
 

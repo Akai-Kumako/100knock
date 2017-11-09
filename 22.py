@@ -9,6 +9,8 @@ with open("jawiki-country.json", "r") as f:
     if a.get("title") == "イギリス":
       b = a.get("text").split("\n")
 
+regex = re.compile("^\[\[Category:(.*?)(\|.*)*\]\]$")
+
 for j in b:
   if "Category" in j:
-    print(re.search("^\[\[Category:(.*?)(\|.*)*\]\]$", j).group(1))
+    print(regex.search(j).group(1))
