@@ -13,7 +13,7 @@ info = {}
 
 for j in b:
   c = re.search(u"^\|(.*?)\s*=\s*(.*?)$", j)
-  if c != None: info[c.group(1)] = re.sub("'{2, 5}", "", c.group(2))
+  if c != None: info[c.group(1)] = re.sub(r"'{2,5}", r"", c.group(2))
   if j == "}}": break
 
 for k, v in info.items():
