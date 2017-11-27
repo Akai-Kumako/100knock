@@ -7,7 +7,7 @@ with open("jawiki-country.json", "r") as f:
   for i in f:
     a = json.loads(i) 
     if a.get("title") == "イギリス":
-      b = a.get("text").replace("<br/>\n").split("\n")
+      b = a.get("text").replace("<br/>\n", "").split("\n")
 
 info = {}
 regex = re.compile(u"^\|(.*?)\s*=\s*(.*?)$")
