@@ -14,8 +14,10 @@ regex = re.compile(u"^\|(.*?)\s*=\s*(.*?)$")
 
 for j in b:
   c = regex.search(j)
-  if c != None: info[c.group(1)] = c.group(2)
-  if j == "}}": break
+  if c != None:
+    info[c.group(1)] = c.group(2)
+  if j == "}}":
+    break
 
 for k, v in info.items():
   print("{0}: {1}".format(k, v))

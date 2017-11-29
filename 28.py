@@ -10,8 +10,8 @@ with open("jawiki-country.json", "r") as f:
       b = a.get("text").replace("<br/>\n", "").split("\n")
 
 info = {}
-regex = re.compile(u"^\|(.*?)\s*=\s*(.*?)$")
-emph = re.compile("'{2,5}")
+regex = re.compile(r"^\|(.*?)\s*=\s*(.*?)$")
+emph = re.compile(r"'{2,5}")
 intl = re.compile(r"\[\[((.+?)\|)?(.+?)\]\]")
 tag = re.compile(r"<\/?[ref|br][^>]*?>")
 extl = re.compile(r"\[http:\/\/[^\]]*?\]")

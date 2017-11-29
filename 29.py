@@ -35,7 +35,6 @@ for j in b:
 
 img = info['国旗画像']
 
-# リクエスト生成
 url = 'https://www.mediawiki.org/w/api.php?' \
     + 'action=query' \
     + '&titles=File:' + urllib.parse.quote(img) \
@@ -43,8 +42,7 @@ url = 'https://www.mediawiki.org/w/api.php?' \
     + '&prop=imageinfo' \
     + '&iiprop=url'
 
-request = urllib.request.Request(url,
-    headers={'User-Agent': 'NLP100_Python(@segavvy)'})
+request = urllib.request.Request(url)
 connection = urllib.request.urlopen(request)
 
 data = json.loads(connection.read().decode())
