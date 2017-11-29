@@ -25,5 +25,7 @@ for k, v in sorted(neko.items(), key = lambda x: -x[1])[0:10]:
 
 mpl.rcParams['font.family'] = "AppleGothic"
 plt.bar(left, height, tick_label=label, align="center")
+plt.xlabel("Top 10 words")
+plt.ylabel("Frequency of appearance")
 
 plt.show() 

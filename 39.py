@@ -1,4 +1,4 @@
-#38.ヒストグラム
+#39.Zipfの法則
 
 import numpy as np
 import pylab as plt
@@ -14,14 +14,19 @@ with open("neko.txt.mecab") as f:
     if c != None:
       neko[c.group(1)] = neko.get(c.group(1), 0) + 1
 
-x = []
+x = {}
 
 for k, v in sorted(neko.items(), key = lambda x: -x[1]): 
-  x.append(v)
+  x[v] = x.get(v, 0) + 1
 
-plt.hist(x, bins = 50, range = (1, 50))
+left = list(x.keys())
+height = sorted(list(x.values()))
 
-plt.xlabel("Frequency of appearance")
-plt.ylabel("Number of word types")
+plt.plot(left, height);
+
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("Occurrence frequency rank")
+plt.ylabel("Frequency of appearance")
 
 plt.show() 
