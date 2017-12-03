@@ -2,7 +2,7 @@
 
 import re
 
-result = re.compile("^(.*?)\t(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)$")
+result = re.compile("^(.*?)\t(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)$")
 
 neko = []
 sent = []
@@ -15,7 +15,7 @@ with open("neko.txt.mecab") as f:
         "surface" : c.group(1),
         "base" : c.group(8),
         "pos" : c.group(2),
-        "pos2" : c.group(3)
+        "pos2" : c.group(3) 
       }
       sent.append(prov)
       if c.group(3) == "句点":

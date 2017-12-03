@@ -2,7 +2,7 @@
 
 import re
 
-result = re.compile("^(.*?)\t(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)$")
+result = re.compile("^(.*?)\t(.*?),(.*?),(.*?)$")
 
 with open("neko.txt.mecab") as f:
   for i in f:
