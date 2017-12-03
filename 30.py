@@ -25,3 +25,4 @@ with open("neko.txt.mecab") as f:
 for sent in neko:
   for word in sent:
     print(word["surface"], word["base"], word["pos"], word["pos2"])
+  print()
