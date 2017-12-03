@@ -12,7 +12,9 @@ with open("neko.txt.mecab") as f:
     c = result.search(i)      
     if c != None:
       if c.group(2) == "名詞":
+        print(c.group(1), c.group(2))
         noun += c.group(1)
+        print(noun)
         j += 1
       else:
         if j > 1:

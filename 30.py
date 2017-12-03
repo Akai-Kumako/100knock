@@ -22,4 +22,6 @@ with open("neko.txt.mecab") as f:
         neko.append(sent)
         sent = []
 
-print(neko)
+for sent in neko:
+  for word in sent:
+    print(word["surface"], word["base"], word["pos"], word["pos2"])
