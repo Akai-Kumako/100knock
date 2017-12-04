@@ -16,7 +16,7 @@ with open("neko.txt.mecab") as f:
     if c != None:
       prov = {
         "surface" : c.group(1),
-        "base" : c.group(8),
+        "base" : c.group(8).split(",", 1)[0],
         "pos" : c.group(2),
         "pos2" : c.group(3) 
       }
