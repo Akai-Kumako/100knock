@@ -19,7 +19,7 @@ x = []
 for k, v in sorted(neko.items(), key = lambda x: -x[1]): 
   x.append(v)
 
-plt.hist(x, bins = 50, range = (1, 50))
+plt.hist(x, bins = 30, range = (1, 30))
 
 plt.xlabel("Frequency of appearance")
 plt.ylabel("Number of word types")

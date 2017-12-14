@@ -10,8 +10,9 @@ sent = []
 with open("neko.txt.mecab") as f:
   for i in f:
     if i == "EOS\n":
-      neko.append(sent)
-      sent = []
+      if len(sent) != 0:
+        neko.append(sent)
+        sent = []
     c = result.search(i)      
     if c != None:
       prov = {
