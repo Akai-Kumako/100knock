@@ -22,6 +22,9 @@ class Chunk:
     self.morphs = morphs
     self.dst = dst
     self.srcs = srcs
+    self.string = ""
+    for s in self.morphs:
+      self.string += s.surface
 
 with open("neko.txt.cabocha") as f:
   for i in f:
@@ -54,11 +57,15 @@ with open("neko.txt.cabocha") as f:
         rela = []
     else:
       morp = re.split("[\t,]", i)
-      morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      if morp[1] != "記号":
+        morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      else:
+        morph = Morph("", "", "", "")
       chun.append(morph)
 
-for c in neko[1]:
-  chunk = ""
-  for s in c.morphs:
-    chunk += s.surface
-  print("morphs: {}, dst: {}, srcs: {}".format(chunk, c.dst, c.srcs))
+for s in neko:
+  for i in range(len(s)):
+    if s[i].string != "":
+      x = s[i].dst
+      if int(x) != -1:
+        print(s[i].string + "\t" + s[int(x)].string)
