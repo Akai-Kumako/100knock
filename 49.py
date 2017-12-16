@@ -45,7 +45,7 @@ class Chunk:
     return False
 
   def toRoot(self, s, i):
-    root = [i]
+    root = []
     dst = int(s[i].dst)
     while dst != -1:
       root.append(dst)
@@ -103,29 +103,27 @@ with open("neko.txt.cabocha") as f:
 
 for s in neko:
   for i in range(len(s)):
+    if s[i].dst == -1:
+      continue
     for j in range(i + 1, len(s)):
       if s[i].check("名詞") and s[j].check("名詞"):
         merge = min(set(s[i].toRoot(s, i)) & set(s[j].toRoot(s, i)))
-        if s[i].dst > s[j].dst: 
+        if s[i].dst > s[j].dst or s[j].dst != -1: 
           print(s[i].replace("X"), end = "")
-          dst = int(s[i].dst)
-          while dst != merge - 1:
+          for dst in s[i].toRoot(s, i):
             print(" -> " + s[dst].string, end = "")
-            dst = int(s[dst].dst)
-          print(" | ")
+          print(" | ", end = "")
           print(s[j].replace("Y"), end = "")
-          dst = int(s[j].dst)
-          while dst != merge - 1:
+          for dst in s[j].toRoot(s, j):
             print(" -> " + s[dst].string, end = "")
-            dst = int(s[dst].dst)
-          print(" | {}".format(s[mearge].string))
+          print(" | {}".format(s[merge - 1].string))
         else:
           print(s[i].replace("X"), end = "")
           dst = int(s[i].dst)
-          while dst != merge - 1:
+          while dst != merge and dst != -1:
             print(" -> " + s[dst].string, end = "")
             dst = int(s[dst].dst)
-          print(" -> {}".format(s[mearge].replece("Y")))
+          print(" -> {}".format(s[merge - 1].replace("Y")))
 
 s = neko[5]
 for i in range(len(s)):
