@@ -45,7 +45,7 @@ class Chunk:
     return False
 
   def toRoot(self, s, i):
-    root = []
+    root = [i]
     dst = int(s[i].dst)
     while dst != -1:
       root.append(dst)
@@ -107,24 +107,29 @@ for s in neko:
       continue
     for j in range(i + 1, len(s)):
       if s[i].check("名詞") and s[j].check("名詞"):
-        merge = min(set(s[i].toRoot(s, i)) & set(s[j].toRoot(s, i)))
-        if s[i].dst > s[j].dst or s[j].dst != -1: 
+        merge = min(set(s[i].toRoot(s, i)) & set(s[j].toRoot(s, j)))
+        union = set(s[i].toRoot(s, i)) | set(s[j].toRoot(s, j))
+        if list(union) != s[i].toRoot(s, i): 
           print(s[i].replace("X"), end = "")
-          for dst in s[i].toRoot(s, i):
+          for dst in s[i].toRoot(s, i)[:-1]:
+            if dst == merge or dst == i:
+              continue
             print(" -> " + s[dst].string, end = "")
           print(" | ", end = "")
           print(s[j].replace("Y"), end = "")
-          for dst in s[j].toRoot(s, j):
+          for dst in s[j].toRoot(s, j)[:-1]:
+            if dst == merge or dst == j:
+              continue
             print(" -> " + s[dst].string, end = "")
-          print(" | {}".format(s[merge - 1].string))
+          print(" | {}".format(s[merge].string))
         else:
           print(s[i].replace("X"), end = "")
           dst = int(s[i].dst)
           while dst != merge and dst != -1:
             print(" -> " + s[dst].string, end = "")
             dst = int(s[dst].dst)
-          print(" -> {}".format(s[merge - 1].replace("Y")))
+          print(" -> {}".format(s[merge].replace("Y")))
 
-s = neko[5]
+s = neko[2]
 for i in range(len(s)):
   print(s[i].toRoot(s, i))
