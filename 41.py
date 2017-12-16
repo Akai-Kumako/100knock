@@ -57,7 +57,7 @@ with open("neko.txt.cabocha") as f:
       morph = Morph(morp[0], morp[7], morp[1], morp[2])
       chun.append(morph)
 
-for c in neko[3]:
+for c in neko[7]:
   chunk = ""
   for s in c.morphs:
     chunk += s.surface

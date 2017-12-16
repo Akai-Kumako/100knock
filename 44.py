@@ -96,4 +96,4 @@ for i in range(len(s)):
 
 if len(edges) > 0:
   graph = graphed(edges, directed=True)
-  graph.write_png("44.png")
+  graph.write_png("output/44.png")
