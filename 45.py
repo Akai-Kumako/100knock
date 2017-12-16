@@ -1,4 +1,4 @@
-#41. 係り受け解析結果の読み込み（文節・係り受け:w）
+#43. 名詞を含む文節が動詞を含む文節に係るものを抽出
 
 import re
 
@@ -22,6 +22,21 @@ class Chunk:
     self.morphs = morphs
     self.dst = dst
     self.srcs = srcs
+    self.string = ""
+    for s in self.morphs:
+      self.string += s.surface
+
+  def check(self, pos):
+    for morph in self.morphs:
+      if morph.pos == pos:
+        return True
+    return False
+
+  def base(self, pos):
+    for morph in self.morphs:
+      if morph.pos == pos:
+        return morph.base
+    return None
 
 with open("neko.txt.cabocha") as f:
   for i in f:
@@ -54,11 +69,17 @@ with open("neko.txt.cabocha") as f:
         rela = []
     else:
       morp = re.split("[\t,]", i)
-      morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      if morp[1] != "記号":
+        morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      else:
+        morph = Morph("", "", "", "")
       chun.append(morph)
 
-for c in neko[5]:
-  chunk = ""
-  for s in c.morphs:
-    chunk += s.surface
-  print("morphs: {}, dst: {}, srcs: {}".format(chunk, c.dst, c.srcs))
+s = neko[5]
+for i in range(len(s)):
+  if s[i].check("動詞"):
+    print(s[i].base("動詞") + "\t", end = "")
+    for x in s[i].srcs:
+      if s[int(x)].check("助詞"):
+        print(s[int(x)].base("助詞") + " ", end = "")
+    print()

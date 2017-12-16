@@ -1,6 +1,7 @@
-#41. 係り受け解析結果の読み込み（文節・係り受け:w）
+#44. 係り受け木の可視化
 
 import re
+import pydot_ng as pydot
 
 neko = []
 sent = []
@@ -22,6 +23,31 @@ class Chunk:
     self.morphs = morphs
     self.dst = dst
     self.srcs = srcs
+    self.string = ""
+    for s in self.morphs:
+      self.string += s.surface
+
+  def check(self, pos):
+    for morph in self.morphs:
+      if morph.pos == pos:
+        return True
+    return False
+
+def graphed(edges, directed = False):
+  if directed:
+    graph = pydot.Dot(graph_type = "digraph")
+  else:
+    graph = pydot.Dot(graph_type = "graph")
+  for edge in edges:
+    id1 = str(edge[0][0])
+    label1 = str(edge[0][1])
+    id2 = str(edge[1][0])
+    label2 = str(edge[1][1])
+    graph.add_node(pydot.Node(id1, label=label1))
+    graph.add_node(pydot.Node(id2, label=label2))
+    graph.add_edge(pydot.Edge(id1, id2))
+  return graph
+    
 
 with open("neko.txt.cabocha") as f:
   for i in f:
@@ -54,11 +80,20 @@ with open("neko.txt.cabocha") as f:
         rela = []
     else:
       morp = re.split("[\t,]", i)
-      morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      if morp[1] != "記号":
+        morph = Morph(morp[0], morp[7], morp[1], morp[2])
+      else:
+        morph = Morph("", "", "", "")
       chun.append(morph)
 
-for c in neko[5]:
-  chunk = ""
-  for s in c.morphs:
-    chunk += s.surface
-  print("morphs: {}, dst: {}, srcs: {}".format(chunk, c.dst, c.srcs))
+s = neko[3]
+edges = []
+for i in range(len(s)):
+  if s[i].string != "":
+    x = s[i].dst
+    if int(x) != -1:
+      edges.append(((i, s[i].string), (x, s[int(x)].string)))
+
+if len(edges) > 0:
+  graph = graphed(edges, directed=True)
+  graph.write_png("44.png")
