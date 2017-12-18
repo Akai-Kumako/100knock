@@ -84,6 +84,8 @@ with open("neko.txt.cabocha") as f:
 for s in neko:
   for i in range(len(s)):
     if s[i].check("名詞") and s[i].dst != -1:
+      if int(s[i].dst) == -1:
+        continue
       print(s[i].string, end = "")
       dst = int(s[i].dst)
       while dst != -1:
