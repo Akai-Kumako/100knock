@@ -75,11 +75,11 @@ with open("neko.txt.cabocha") as f:
         morph = Morph("", "", "", "")
       chun.append(morph)
 
-s = neko[5]
-for i in range(len(s)):
-  if s[i].check("動詞"):
-    print(s[i].base("動詞") + "\t", end = "")
-    for x in s[i].srcs:
-      if s[int(x)].check("助詞"):
-        print(s[int(x)].base("助詞") + " ", end = "")
-    print()
+for s in neko:
+  for i in range(len(s)):
+    if s[i].check("動詞"):
+      print(s[i].base("動詞") + "\t", end = "")
+      for x in s[i].srcs:
+        if s[int(x)].check("助詞"):
+          print(s[int(x)].base("助詞") + " ", end = "")
+      print()

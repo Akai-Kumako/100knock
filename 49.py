@@ -59,6 +59,8 @@ class Chunk:
       if morph.pos == "名詞" and flag:
         rechunk += sign
         flag = False
+      elif morph.pos == "名詞" and (not flag):
+        continue
       else:
         rechunk += morph.surface
     return rechunk
@@ -129,7 +131,3 @@ for s in neko:
             print(" -> " + s[dst].string, end = "")
             dst = int(s[dst].dst)
           print(" -> {}".format(s[merge].replace("Y")))
-
-s = neko[2]
-for i in range(len(s)):
-  print(s[i].toRoot(s, i))
