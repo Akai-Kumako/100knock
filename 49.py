@@ -1,4 +1,4 @@
-#43. 名詞を含む文節が動詞を含む文節に係るものを抽出
+#49. 名詞間の係り受けパスの抽出
 
 import re
 
@@ -113,13 +113,13 @@ for s in neko:
         union = set(s[i].toRoot(s, i)) | set(s[j].toRoot(s, j))
         if list(union) != s[i].toRoot(s, i): 
           print(s[i].replace("X"), end = "")
-          for dst in s[i].toRoot(s, i)[:-1]:
+          for dst in list(set(s[i].toRoot(s, i)) - set(s[j].toRoot(s, j))):
             if dst == merge or dst == i:
               continue
             print(" -> " + s[dst].string, end = "")
           print(" | ", end = "")
           print(s[j].replace("Y"), end = "")
-          for dst in s[j].toRoot(s, j)[:-1]:
+          for dst in list(set(s[j].toRoot(s, j)) - set(s[i].toRoot(s, i))):
             if dst == merge or dst == j:
               continue
             print(" -> " + s[dst].string, end = "")
