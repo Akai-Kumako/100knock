@@ -1,7 +1,8 @@
 #56. 共参照解析
 import xml.etree.ElementTree as ET
 
-root = ET.parse("nlp.txt.xml")
+tree = ET.parse("nlp.txt.xml")
+root = tree.getroot()
 
 rep_dict = {}
 for coreference in root.iterfind('./document/coreference/coreference'):
@@ -29,7 +30,7 @@ for sentence in root.iterfind('./document/sentences/sentence'):
 
             (end, rep_text) = rep_dict[(sent_id, token_id)]
 
-            print('[' + rep_text + '] (', end='')
+            print('[' + rep_text + '(', end='')
             org_rest = end - token_id
 
         print(token.findtext('word'), end='')
@@ -37,8 +38,6 @@ for sentence in root.iterfind('./document/sentences/sentence'):
         if org_rest > 0:
             org_rest -= 1
             if org_rest == 0:
-                print(')', end='')
+                print(')]', end='')
 
         print(' ', end='')
-
-    print()
