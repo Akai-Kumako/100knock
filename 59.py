@@ -7,7 +7,10 @@ root = ET.parse("nlp.txt.xml")
 phrase = re.compile("\(NP\s(.*?)\)\)")
 noun = re.compile("\([A-Z]+\s(.*?)\)")
 
+text = []
+
 for sentence in root.iterfind("./document/sentences/sentence"):
   parse = sentence.findtext("parse")
   for n in phrase.findall(parse):
+    
     print(re.sub("\([A-Z]+\s", "", " ".join(noun.findall(n + ")"))))

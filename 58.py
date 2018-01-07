@@ -4,11 +4,11 @@ import xml.etree.ElementTree as ET
 
 root = ET.parse("nlp.txt.xml")
 
-nsubj = {}
-dobj = {}
-
 for sentence in root.iterfind("./document/sentences/sentence"):
   dependence = sentence.iterfind('./dependencies[@type="collapsed-dependencies"]/dep')  
+  nsubj = {}
+  dobj = {}
+
   for dep in dependence:
     if dep.get("type") == "nsubj":
       nsubj[dep.find("./governor").text] = dep.find("./dependent").text
