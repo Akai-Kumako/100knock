@@ -8,12 +8,16 @@ for sentence in root.iterfind("./document/sentences/sentence"):
   dependence = sentence.iterfind('./dependencies[@type="collapsed-dependencies"]/dep')  
   nsubj = {}
   dobj = {}
-
+  pred = {}
   for dep in dependence:
+    gove = dep.find("./governor").text
+    depe = dep.find("./dependent").text
+    idx = dep.find("./governor").get("idx")
+    pred[idx] = gove
     if dep.get("type") == "nsubj":
-      nsubj[dep.find("./governor").text] = dep.find("./dependent").text
+      nsubj[idx] = depe
     if dep.get("type") == "dobj":
-      dobj[dep.find("./governor").text] = dep.find("./dependent").text
-  for predicate in nsubj.keys():
-    if predicate in dobj.keys():
-      print("{}\t{}\t{}".format(nsubj[predicate], predicate, dobj[predicate]))
+      dobj[idx] = depe
+  for idx in nsubj.keys():
+    if idx in dobj.keys() and idx in nsubj.keys():
+      print("{}\t{}\t{}".format(nsubj[idx], pred[idx], dobj[idx]))
