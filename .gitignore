@@ -1,8 +1,1 @@
-/Chapter2/hightemp.txt
-/Chapter3/jawiki-country.json
-/Chapter4/neko.txt
-/Chapter4/noko.txt.mecab
-/Chapter5/neko.txt
-/Chapter5/neko.txt.cabocha
-/Chapter6/nlp.txt
-/Chapter6/nlp.txt.xml
+*.DS_Store
