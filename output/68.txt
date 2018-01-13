@@ -1,0 +1,10 @@
+1	Madonna
+2	Madonna
+3	Madonna
+4	Björk
+5	Björk
+6	The Prodigy
+7	Björk
+8	The Prodigy
+9	Björk
+10	The Prodigy
