@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from pymongo import ASCENDING, DESCENDING
 client = MongoClient('localhost', 27017)
 
-db = client.nlp_database
+db = client.kyoko
 co = db.nlp_collection
 
 with open("artist.json", "r") as f:

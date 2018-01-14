@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from pymongo import DESCENDING
 client = MongoClient('localhost', 27017)
 
-db = client.nlp_database
+db = client.kyoko
 co = db.nlp_collection
 
 data = co.find({"tags.value": "dance"})

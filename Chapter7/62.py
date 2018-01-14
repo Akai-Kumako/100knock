@@ -2,11 +2,10 @@
 
 import plyvel
 
-artists = plyvel.DB('/tmp/artist.ldb', create_if_missing=True)
+artists = plyvel.DB('/tmp/kyoko.ldb', create_if_missing=True)
 
 j = 0
 for key, value in artists:
-  if value == "Japan".encode("utf-8"):
-    j += 1
+  j += value.decode("utf-8").count("Japan")
 
 print(j)

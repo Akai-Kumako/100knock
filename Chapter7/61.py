@@ -2,5 +2,5 @@
 
 import plyvel
 
-artists = plyvel.DB('/tmp/artist.ldb', create_if_missing=True)
-print(artists.get("Oasis".encode("utf-8")).decode("utf-8"))
+artists = plyvel.DB('/tmp/kyoko.ldb', create_if_missing=True)
+print(artists.get("エレファントカシマシ".encode("utf-8")).decode("utf-8"))

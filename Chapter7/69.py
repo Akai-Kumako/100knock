@@ -5,7 +5,7 @@ from pymongo import DESCENDING
 from string import Template
 
 client = MongoClient('localhost', 27017)
-db = client.nlp_database
+db = client.kyoko
 co = db.nlp_collection
 
 app = Flask(__name__)
