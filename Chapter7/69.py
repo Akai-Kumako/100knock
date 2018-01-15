@@ -20,9 +20,10 @@ def post():
     dive = []
     trap = {}
     results = {}
-    dive.append({"$or": [{"name": search},
-                         {"aliases.name": search},
-                         {"tags.value": search}]})
+    for word in search.split("+"):
+      dive.append({"$or": [{"name": word},
+                           {"aliases.name": word},
+                           {"tags.value": word}]})
     for div in dive:
       trap = {"$and": [trap, div]}
     data = co.find(trap)
