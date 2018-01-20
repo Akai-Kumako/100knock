@@ -14,8 +14,8 @@ def shaping(name, opt):
     try: f.write(assu)
     except IOError: pass
  
-#shaping("rt-polarity.pos", "+1")
-#shaping("rt-polarity.neg", "-1")
+#shaping("rt-polarity.pos", "1")
+#shaping("rt-polarity.neg", "0")
 
 with open("sentiment.txt", "w") as g:
   sent = []
