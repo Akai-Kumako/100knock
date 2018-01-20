@@ -1,9 +1,9 @@
 #71. ストップワード
 
-stop = ["the", "a", "an"]
+from stop_words import get_stop_words
 
 def check(word):
-  if word in stop:
+  if word in get_stop_words("english"):
     return True
   else:
     return False

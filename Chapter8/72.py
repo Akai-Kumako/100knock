@@ -1,20 +1,17 @@
  #72. 素性抽出
 
 import snowballstemmer
-stemmer = snowballstemmer.stemmer("english")
+from stop_words import get_stop_words
 
-stopword = [".", ",", "the", "a", "and", "of", "it", "to", "is",
-            "that", "in", "\r", "with", "as", "but", "an", "for",
-            "this", "be", "you", "on", "one", "by", "has", "not",
-            "at", "about", "from", "his", "are", "", "--"]
+stemmer = snowballstemmer.stemmer("english")
 
 BoW = {}
 
-with open("rt-polarity.pos", "r", encoding = "ISO-8859-1") as f:
+with open("sentiment.txt", "r") as f:
   for i in f:
     i.replace("\n", "")
     for j in i.split(" "):
-      if j not in stopword:
+      if j not in get_stop_words("english"):
         BoW[stemmer.stemWord(j)] = BoW.get(stemmer.stemWord(j), 0) + 1
 
 for key, value in sorted(BoW.items(), key=lambda x: -x[1]):
