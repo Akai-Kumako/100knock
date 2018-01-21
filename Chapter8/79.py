@@ -4,6 +4,8 @@ import snowballstemmer
 import math
 from stop_words import get_stop_words
 from collections import defaultdict
+import numpy as np
+import matplotlib.pyplot as plt
 
 stemmer = snowballstemmer.stemmer("english")
 
@@ -46,50 +48,51 @@ for i in range(5):
     n += 1
   line.append(a)  
 
-accuracy = []
-precision = []
-recall = []
-fscore = []
+precisions = []
+recalls = []
 
-for z in range(5):
-  data = []
-  for i in list(set([item for sublist in line for item in sublist]) - set(line[z])):
-    a = i.replace("+1", "1").replace("-1", "0").strip("\n").split()
-    sent = []
-    for j in a:
-      j = stemmer.stemWord(j)
-      if j not in get_stop_words("english"):
-        sent.append(j)
-    data.append(sent)
+for thr in np.arange(0.02,1.0,0.05):
+  precision = []
+  recall = []
+  for z in range(5):
+    data = []
+    for i in list(set([item for sublist in line for item in sublist]) - set(line[z])):
+      a = i.replace("+1", "1").replace("-1", "0").strip("\n").split()
+      sent = []
+      for j in a:
+        j = stemmer.stemWord(j)
+        if j not in get_stop_words("english"):
+          sent.append(j)
+      data.append(sent)
 
-  a = train(data)
+    a = train(data)
 
-  tp = 0
-  fp = 0
-  fn = 0
-  tn = 0
+    tp = 0
+    fp = 0
+    fn = 0
+    tn = 0
 
-  for i in line[z]:
-    rate = predict(a, i[3:-1].split())
-    if rate > 0.5:
-      tag = "+1"
-    else:
-      tag = "-1"
-    if tag == "+1" and i[:2] == "+1":
-      tp += 1 
-    elif tag == "+1" and i[:2] == "-1":
-      fp += 1 
-    elif tag == "-1" and i[:2] == "+1":
-      fn += 1 
-    elif tag == "-1" and i[:2] == "-1":
-      tn += 1 
+    for i in line[z]:
+      rate = predict(a, i[3:-1].split())
+      if rate > thr:
+        tag = "+1"
+      else:
+        tag = "-1"
+      if tag == "+1" and i[:2] == "+1":
+        tp += 1 
+      elif tag == "+1" and i[:2] == "-1":
+        fp += 1 
+      elif tag == "-1" and i[:2] == "+1":
+        fn += 1 
+      elif tag == "-1" and i[:2] == "-1":
+        tn += 1 
 
-  accuracy.append((tp + tn) / (tp + fp + fn + tn))
-  precision.append(tp / (tp + fp))
-  recall.append(tp / (tp + fn))
-  fscore.append((2 * recall[z] * precision[z]) / (recall[z] + precision[z]))
+    precision.append(tp / (tp + fp))
+    recall.append(tp / (tp + fn))
 
-print("正解率: {}".format(sum(accuracy) / 5))
-print("適合率: {}".format(sum(precision) / 5))
-print("再現率: {}".format(sum(recall) / 5))
-print("F1スコア: {}".format(sum(fscore) / 5))
+  precisions.append(sum(precision) / 5)
+  recalls.append(sum(recall) / 5)
+
+x = np.arange(0.02, 1.0, 0.05)
+plt.plot(x, precisions, x, recalls)
+plt.show() 

@@ -71,7 +71,7 @@ for z in range(5):
 
   for i in line[z]:
     rate = predict(a, i[3:-1].split())
-    if rate > 0.5:
+    if rate > 0.02:
       tag = "+1"
     else:
       tag = "-1"
