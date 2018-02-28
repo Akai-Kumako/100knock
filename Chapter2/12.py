@@ -7,7 +7,10 @@ b = open("col2.txt", "w")
 
 lines = f.readlines()
 
-for i in lines:
+for line in lines:
+  datas = line.split()
+  a.writelines(datas[0] + "\n")
+  b.writelines(datas[1] + "\n")
 
 f.close()
 a.close()
