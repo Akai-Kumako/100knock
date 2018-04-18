@@ -3,6 +3,7 @@
 import pickle
 import numpy as np
 from sklearn.manifold import TSNE
+from sklearn.cluster import KMeans
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -14,18 +15,14 @@ features = np.empty([0, 300], dtype=np.float64)
 for value in vecs.values():
   features = np.vstack([features, value])
 
-tsne = TSNE(n_components=3).fit_transform(features)
+tsne = TSNE().fit_transform(features)
 
-x = np.arange(-100, 100, 0.25)
-y = np.arange(-100, 100, 0.25)
+clusters = KMeans(n_clusters=5).fit_predict(features)
 
-X, Y = np.meshgrid(x, y)
-Z = np.sin(X)+ np.cos(Y)
-
-fig = plt.figure()
-ax = Axes3D(fig)
-ax.plot_wireframe(X,Y,Z)
-
+fig, ax = plt.subplots()
+cmap = plt.get_cmap("Set1")
+for vecs, label in enumerate(vecs.keys()):
+    cval = cmap(clusters[vecs] / 4)
+    ax.scatter(tsne[vecs, 0], tsne[vecs, 1], marker='.', color=cval)
+    ax.annotate(label, xy=(tsne[vecs, 0], tsne[vecs, 1]), color=cval)
 plt.show()
-
-print(tsne)
