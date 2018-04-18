@@ -36,7 +36,7 @@ with open("freq-co.txt", "r") as f:
     if int(a.group(3)) > 9:
       t = ts[a.group(1)]
       c = cs[a.group(2)]
-      ppmi = max([math.log((8333308 * int(a.group(3))) / (t * c)), 0])
+      ppmi = max([math.log((69289061 * int(a.group(3))) / (t * c)), 0])
       det[t_num[a.group(1)], c_num[a.group(2)]] = ppmi
 
 with open("t_num.pickle", "wb") as f:
