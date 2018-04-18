@@ -14,7 +14,7 @@ names = []
 for nation in nations:
   name = nation.strip("\n").replace(" ", "_")
   try:
-    vecs[name] = model[nation.strip("\n").replace(" ", "_")]
+    vecs[name] = list(model[nation.strip("\n").replace(" ", "_")])
     names.append(name)
   except KeyError:
     pass
